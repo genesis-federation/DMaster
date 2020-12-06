@@ -29,7 +29,7 @@ namespace DMaster
 
             var config = new DiscordConfiguration
             {
-                Token = "NzU0Nzg0ODE2NjQxMzQzNjMw.X15yIw.78ntEaJNo5a4hFqO7ziwG7YVSls",
+                Token = "NzU0Nzg0ODE2NjQxMzQzNjMw.X15yIw.ZcROhXuADop5u5gIemaT9umZUqo",
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
             };
