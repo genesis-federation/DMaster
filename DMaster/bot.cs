@@ -9,7 +9,6 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace DMaster
 {
@@ -20,13 +19,6 @@ namespace DMaster
         public CommandsNextExtension Commands { get; private set; }
         public async Task RunAsync()
         {
-            var json = string.Empty;
-            using (var fs = File.OpenRead("Config.json"))
-            using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
-                json = await sr.ReadToEndAsync().ConfigureAwait(false);
-
-            var configJson = JsonConvert.DeserializeObject<Configjson>(json);
-
             var config = new DiscordConfiguration
             {
                 Token = "NzU0Nzg0ODE2NjQxMzQzNjMw.X15yIw.FOZN9XETphtfkYr9olHMsVEEglQ",
@@ -43,7 +35,7 @@ namespace DMaster
 
             var commandsConfig = new CommandsNextConfiguration
             {
-                StringPrefixes = new string[] {configJson.Prefix}, 
+                StringPrefixes = new string[] {"$"}, 
                 EnableDms = false,
                 EnableMentionPrefix = true,
 
