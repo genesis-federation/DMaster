@@ -7,6 +7,7 @@ using DMaster.Commands;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
+using DSharpPlus.Interactivity;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -15,11 +16,12 @@ namespace DMaster
     public class bot
     {
         public DiscordClient Client { get; private set; }
-        public Commands​Next​Extension Commands { get; private set; }
+        public InteractivityExtension Interactivity { get; private set; }
+        public CommandsNextExtension Commands { get; private set; }
         public async Task RunAsync()
         {
             var json = string.Empty;
-            using (var fs = File.OpenRead("config.json"))
+            using (var fs = File.OpenRead("Config.json"))
             using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
                 json = await sr.ReadToEndAsync().ConfigureAwait(false);
 
@@ -27,13 +29,17 @@ namespace DMaster
 
             var config = new DiscordConfiguration
             {
-                Token = configJson.Token,
+                Token = "NzU0Nzg0ODE2NjQxMzQzNjMw.X15yIw.78ntEaJNo5a4hFqO7ziwG7YVSls",
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
             };
 
             Client = new DiscordClient(config);
             Client.Ready += OnClientReady;
+            Client.UseInteractivity(new InteractivityConfiguration
+            {
+                Timeout = TimeSpan.FromMinutes(15)
+            });
 
             var commandsConfig = new CommandsNextConfiguration
             {
