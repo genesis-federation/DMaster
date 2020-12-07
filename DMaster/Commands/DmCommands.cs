@@ -163,12 +163,15 @@ namespace DMaster.Commands
                     else if (server.Result.Content.ToLower() != "cancel")
                     {
                         if (server.Result.Content.ToLower() == "no")
-                            NameContent = "anonymous";
+                            ServerContent = "";
                         else
                         {
                             await ctx.Channel.SendMessageAsync(embed: yessnoError);
                             goto point3;
                         }
+                    }
+                    else
+                    {
                         Canceled = true;
                     }
                     if (!Canceled)
