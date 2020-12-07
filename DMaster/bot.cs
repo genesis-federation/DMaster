@@ -21,7 +21,7 @@ namespace DMaster
         {
             var config = new DiscordConfiguration
             {
-                Token = "NzU0Nzg0ODE2NjQxMzQzNjMw.X15yIw.FOZN9XETphtfkYr9olHMsVEEglQ",
+                Token = "",
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
             };
