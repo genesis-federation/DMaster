@@ -182,7 +182,7 @@ namespace DMaster.Commands
                             var MemeberRoles = serverMember.Roles;
                             foreach (var role in MemeberRoles)
                             {
-                                if (role.Name == RoleName || role.Mention == RoleName || RoleName == "everyone")
+                                if (role.Name.ToLower() == RoleName.ToLower() || role.Mention == RoleName || RoleName == "everyone")
                                 {
                                     SB.AppendLine("You got a message from " + NameContent + ServerContent + ":");
                                     SB.AppendLine();
