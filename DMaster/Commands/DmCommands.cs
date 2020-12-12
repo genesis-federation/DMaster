@@ -26,50 +26,55 @@ namespace DMaster.Commands
         [Description("Sends a message to a group of people with a specific role")]
         public async Task Send(CommandContext ctx, [Description("Target role")]string RoleName)
         {
-        var Sendembed = new DiscordEmbedBuilder
-        {
-        Title = "Please enter the message",
-        Description = "Enter the message that you want to send to a group of people with selected role"
-        };
-        var q1 = new DiscordEmbedBuilder
-        {
-            Title = "Do you want to send message anonymously/under other name?",
-            Description = "If you want to send this message as anonymous or using other name, please send `yes`. Else, send `no`",
-        };
-        var q11 = new DiscordEmbedBuilder
-        {
-            Title = "Do you want to replace your name?",
-            Description = "If you want to send this message using other name, please send `yes`. Else, send `no` to send this message anonymously",
-        };
-        var q111 = new DiscordEmbedBuilder
-        {
-            Title = "Please enter the name/pseudonym",
-        };
-        var q2= new DiscordEmbedBuilder
-        {
-            Title = "Do you want to mention server?",
-            Description = "If you want to mentioned current server in your message, send `yes`. Else, send `no`",
-        };
-        var sucess = new DiscordEmbedBuilder
-        {
-            Title = "Sending Messages...",
-            Color = DiscordColor.DarkGreen
-        };
+            var RoleEmbed = new DiscordEmbedBuilder
+            {
+                Title = "Please enter the target role(s)",
+                Description = "Please send a role that you want to choose as target. If you want to set a complex role target, please follow the instruction" + "\n" + "if you want your target to have more than one specific role at one time you should use `[]` inside which you need to enter roles and separate them with `and`. Example: `[role1 and role2]`" + "\n" + "If you want to choose your target groups of people with different roles, or set of roles, just enter them and separate with `or`. Example: `role1 or role2` - will send message to people who have either role1 or role2. Another example: `[role1 and role2] or role3` - will send a message to 2 groups of people, who have either role1 and role2 or just role3"
+            };
+            var Sendembed = new DiscordEmbedBuilder
+            {
+                Title = "Please enter the message",
+                Description = "Enter the message that you want to send to a group of people with selected role"
+            };
+            var q1 = new DiscordEmbedBuilder
+            {
+                Title = "Do you want to send message anonymously/under other name?",
+                Description = "If you want to send this message as anonymous or using other name, please send `yes`. Else, send `no`",
+            };
+            var q11 = new DiscordEmbedBuilder
+            {
+                Title = "Do you want to replace your name?",
+                Description = "If you want to send this message using other name, please send `yes`. Else, send `no` to send this message anonymously",
+            };
+            var q111 = new DiscordEmbedBuilder
+            {
+                Title = "Please enter the name/pseudonym",
+            };
+            var q2 = new DiscordEmbedBuilder
+            {
+                Title = "Do you want to mention server?",
+                Description = "If you want to mentioned current server in your message, send `yes`. Else, send `no`",
+            };
+            var sucess = new DiscordEmbedBuilder
+            {
+                Title = "Sending Messages...",
+                Color = DiscordColor.DarkGreen
+            };
             var cancel = new DiscordEmbedBuilder
-        {
-            Title = "Message setup successfully canceled",
-            Color = DiscordColor.DarkRed
-        };
-        var roleError = new DiscordEmbedBuilder
-        {
-            Title = "Role " + RoleName + " doesn't exists",
-            Color = DiscordColor.DarkRed
-        };
-        var yessnoError = new DiscordEmbedBuilder
-        {
-            Title = "Please, enter `yes` or `no`",
-            Color = DiscordColor.DarkRed
-        };
+            {
+                Title = "Message setup successfully canceled",
+                Color = DiscordColor.DarkRed
+            };
+            var roleError = new DiscordEmbedBuilder
+            {
+                Title = "Role " + RoleName + " doesn't exists",
+                Color = DiscordColor.DarkRed
+            };
+            var yessnoError = new DiscordEmbedBuilder
+            {
+                Title = "Please, enter `yes` or `no`",
+                Color = DiscordColor.DarkRed
+            };
 
 
             StringBuilder SB = new StringBuilder();
@@ -82,6 +87,10 @@ namespace DMaster.Commands
 
             bool RoleExists = false;
             bool Canceled = false;
+
+            //await ctx.Channel.SendMessageAsync(embed: RoleEmbed);
+            //var roleMessage = await interactivity.WaitForMessageAsync(x => x.Channel == ctx.Channel).ConfigureAwait(false);
+
             foreach (var role in Rr)
             {
                 if (RoleName.ToLower() == role.Name.ToLower() || RoleName == role.Mention || RoleName == "everyone")
@@ -188,6 +197,7 @@ namespace DMaster.Commands
                                     SB.AppendLine();
                                     SB.AppendLine(message.Result.Content);
                                     serverMember.SendMessageAsync(SB.ToString());
+                                    Console.WriteLine(serverMember.Username);
                                     SB.Clear();
                                     break;
                                 }
